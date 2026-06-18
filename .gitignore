@@ -9,6 +9,6 @@ out/
 # Log files
 *.log
 
-# System files (Mac / Windows)
+# System files (Mac)
 .DS_Store
 Thumbs.db
