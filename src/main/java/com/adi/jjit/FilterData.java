@@ -10,8 +10,9 @@ public class FilterData {
     private final List<String> skillToExclude;
     private final int minSalary;
     private final String contractType;
+    private final String workingMode;
 
-    public FilterData(String mainSkill, int experience, List<String> supportingSkill, List<String> skillToExclude, int minSalary, String contractType) {
+    public FilterData(String mainSkill, int experience, List<String> supportingSkill, List<String> skillToExclude, int minSalary, String contractType , String workingMode) {
         if (mainSkill != null) {
             this.mainSkill = mainSkill.trim().toLowerCase();
         } else {
@@ -38,6 +39,12 @@ public class FilterData {
             this.contractType = contractType.trim().toLowerCase();
         } else {
             this.contractType = "";
+        }
+
+        if (workingMode != null) {
+            this.workingMode = contractType.trim().toLowerCase();
+        } else {
+            this.workingMode = "";
         }
     }
 
@@ -66,13 +73,20 @@ public class FilterData {
         return contractType;
     }
 
+    public String getWorkingMode() {
+        return workingMode;
+    }
+
     @Override
     public String toString() {
-        return "mainSkill='" + mainSkill + '\'' +
+        return "FilterData{" +
+                "mainSkill='" + mainSkill + '\'' +
                 ", experience=" + experience +
                 ", supportingSkill=" + supportingSkill +
                 ", skillToExclude=" + skillToExclude +
                 ", minSalary=" + minSalary +
-                ", contractType='" + contractType + '\'';
+                ", contractType='" + contractType + '\'' +
+                ", workingMode='" + workingMode + '\'' +
+                '}';
     }
 }
