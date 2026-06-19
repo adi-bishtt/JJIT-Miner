@@ -42,7 +42,7 @@ public class FilterData {
         }
 
         if (workingMode != null) {
-            this.workingMode = contractType.trim().toLowerCase();
+            this.workingMode = workingMode.trim().toLowerCase();
         } else {
             this.workingMode = "";
         }
