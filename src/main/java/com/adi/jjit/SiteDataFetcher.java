@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SiteDataFetcher {
     public static List<String> fetchJobUrls() {
-        List<String> urls = new ArrayList<>();
+        List<String> jsonEndpoints = new ArrayList<>();
         String sitemapUrl = "https://public.justjoin.com/justjoinit/sitemaps/active-jobs/part0.xml";
 
         try {
@@ -26,9 +26,17 @@ public class SiteDataFetcher {
             Elements locTags = doc.select("loc");
 
             for (Element loc : locTags) {
-                String url = loc.text().trim();
-                if (!url.isEmpty()) {
-                    urls.add(url);
+                String rawUrl = loc.text().trim();
+
+                if (!rawUrl.isEmpty() && rawUrl.contains("/job-offer/")) {
+                    String[] urlParts = rawUrl.split("/job-offer/");
+
+                    if (urlParts.length > 1) {
+                        String slug = urlParts[1];
+                        String apiEndpoint = "https://justjoin.it/api/candidate-api/offers/" + slug;
+
+                        jsonEndpoints.add(apiEndpoint);
+                    }
                 }
             }
 
@@ -37,6 +45,6 @@ public class SiteDataFetcher {
             e.printStackTrace();
         }
 
-        return urls;
+        return jsonEndpoints;
     }
 }
