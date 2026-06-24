@@ -21,6 +21,7 @@ public class ExtractedJobData {
         public int to;
         public String currency;
         public String type;
+        public String unit;
     }
 
     public static class Skill {

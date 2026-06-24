@@ -1,24 +1,30 @@
 package com.adi.jjit;
 
 import com.google.gson.Gson;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
-import java.io.IOException;
 
 public class JobDataExtractor {
 
     public static ExtractedJobData extractFields(String jsonApiUrl) {
         try {
-            String jsonResponse = Jsoup.connect(jsonApiUrl)
+            long jitter = 50 + (long)(Math.random() * 100);
+            Thread.sleep(jitter);
+
+            Connection.Response response = Jsoup.connect(jsonApiUrl)
                     .ignoreContentType(true)
-                    .userAgent("Mozilla/5.0")
-                    .timeout(10000)
-                    .execute()
-                    .body();
+                    .followRedirects(true)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36")
+                    .header("Accept", "application/json")
+                    .timeout(6000)
+                    .execute();
 
-            return new Gson().fromJson(jsonResponse, ExtractedJobData.class);
+            if (response.statusCode() == 200) {
+                return new Gson().fromJson(response.body(), ExtractedJobData.class);
+            }
+            return null;
 
-        } catch (IOException e) {
-            System.out.println("Connection Error: Fetch failed.");
+        } catch (Exception e) {
             return null;
         }
     }
