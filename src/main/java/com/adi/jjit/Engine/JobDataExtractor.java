@@ -1,5 +1,6 @@
-package com.adi.jjit;
+package com.adi.jjit.Engine;
 
+import com.adi.jjit.Model.ExtractedJobData;
 import com.google.gson.Gson;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;

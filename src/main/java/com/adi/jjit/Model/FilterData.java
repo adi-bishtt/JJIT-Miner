@@ -1,4 +1,4 @@
-package com.adi.jjit;
+package com.adi.jjit.Model;
 
 import java.util.ArrayList;
 import java.util.List;

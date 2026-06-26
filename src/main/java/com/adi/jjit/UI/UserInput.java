@@ -1,4 +1,6 @@
-package com.adi.jjit;
+package com.adi.jjit.UI;
+
+import com.adi.jjit.Model.FilterData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +72,7 @@ public class UserInput {
             }
         }
 
-        System.out.print("Enter contract type (e.g., Full-time, Part-time, Contract): ");
+        System.out.print("Enter contract type (e.g., Permanent, B2B, Internship): ");
         String contractType = sc.nextLine().trim();
 
         System.out.print("Enter working mode (e.g., Remote, Hybrid, On-site): ");

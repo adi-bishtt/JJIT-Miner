@@ -1,5 +1,10 @@
 package com.adi.jjit;
 
+import com.adi.jjit.Engine.JobProcessor;
+import com.adi.jjit.Engine.SiteDataFetcher;
+import com.adi.jjit.Model.FilterData;
+import com.adi.jjit.UI.UserInput;
+
 import java.util.List;
 
 public class Main {
@@ -9,12 +14,20 @@ public class Main {
         FilterData criteria = UserInput.userInput();
 
         List<String> apiEndpoints = SiteDataFetcher.fetchJobUrls(criteria.getMainSkill());
+        System.out.println("Sitemap evaluation complete. Items to fetch: " + apiEndpoints.size());
 
-        System.out.println("\nCollected Endpoints:");
-        for (String endpoint : apiEndpoints) {
-            System.out.println(endpoint);
+        if (apiEndpoints.isEmpty()) {
+            System.out.println("No matching endpoints found.");
+            return;
         }
 
-        System.out.println("\nDone. Total links found: " + apiEndpoints.size());
+        List<String> matchingJobUrls = JobProcessor.processEndpoints(apiEndpoints, criteria);
+
+        System.out.println("\nMatching Job Listings:");
+        for (String url : matchingJobUrls) {
+            System.out.println(url);
+        }
+
+        System.out.println("\nDone. Found " + matchingJobUrls.size() + " matches.");
     }
 }
