@@ -22,7 +22,13 @@ public class JobMatcher {
             String level = job.experienceLevel.toLowerCase().trim();
             int maxAllowedExp = filter.getExperience() + 2;
 
-            if (level.equals("senior") && maxAllowedExp < 5) {
+            if (level.contains("c-level") && maxAllowedExp < 8) {
+                return false;
+            }
+            if ((level.contains("leader") || level.contains("manager")) && maxAllowedExp < 5) {
+                return false;
+            }
+            if (level.equals("senior") && maxAllowedExp < 4) {
                 return false;
             }
             if (level.equals("mid") && maxAllowedExp < 3) {
@@ -34,6 +40,27 @@ public class JobMatcher {
             if (!job.workplaceType.toLowerCase().contains(filter.getWorkingMode())) {
                 return false;
             }
+        }
+
+        if (!filter.getContractType().isEmpty() && job.employmentTypes != null) {
+            String targetContract = filter.getContractType().toLowerCase();
+
+            if (targetContract.contains("permanent")) {
+                targetContract = "permanent";
+            } else if (targetContract.contains("mandate")) {
+                targetContract = "mandate_contract";
+            } else if (targetContract.contains("task") || targetContract.contains("specific")) {
+                targetContract = "contract";
+            }
+
+            boolean contractMatches = false;
+            for (ExtractedJobData.EmploymentType emp : job.employmentTypes) {
+                if (emp.type != null && emp.type.toLowerCase().equals(targetContract)) {
+                    contractMatches = true;
+                    break;
+                }
+            }
+            if (!contractMatches) return false;
         }
 
         if (filter.getMinSalary() > 0 && job.employmentTypes != null && !job.employmentTypes.isEmpty()) {

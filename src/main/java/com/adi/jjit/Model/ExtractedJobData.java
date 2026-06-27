@@ -14,6 +14,7 @@ public class ExtractedJobData {
         public int from;
         public int to;
         public String currency;
+        public String type;
     }
 
     public static class Skill {

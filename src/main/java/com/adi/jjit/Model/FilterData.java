@@ -12,7 +12,7 @@ public class FilterData {
     private final String contractType;
     private final String workingMode;
 
-    public FilterData(String mainSkill, int experience, List<String> supportingSkill, List<String> skillToExclude, int minSalary, String contractType , String workingMode) {
+    public FilterData(String mainSkill, int experience, List<String> supportingSkill, List<String> skillToExclude, int minSalary,String contractType, String workingMode) {
         if (mainSkill != null) {
             this.mainSkill = mainSkill.trim().toLowerCase();
         } else {

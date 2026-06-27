@@ -72,12 +72,12 @@ public class UserInput {
             }
         }
 
-        System.out.print("Enter contract type (e.g., Permanent, B2B, Internship): ");
+        System.out.print("Enter contract type (B2B, Permanent, Internship, Mandate, Specific-task): ");
         String contractType = sc.nextLine().trim();
 
         System.out.print("Enter working mode (e.g., Remote, Hybrid, On-site): ");
         String workingMode = sc.nextLine().trim();
 
-        return new FilterData(mainSkill, experience, supportingSkill, skillToExclude, minSalary, contractType, workingMode);
+        return new FilterData(mainSkill, experience, supportingSkill, skillToExclude, minSalary,contractType,workingMode);
     }
 }
